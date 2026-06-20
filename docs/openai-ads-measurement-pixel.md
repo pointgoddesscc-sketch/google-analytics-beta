@@ -30,6 +30,15 @@ Add the following snippet to the `<head>` section of every page where you want t
 
 `pixelId` is required. Create a new `pixelId` in the conversions tab of Ads Manager. `debug` is optional and logs SDK activity to the browser console while you test your integration.
 
+For local testing, initialize the pixel with `debug: true` and remove it before production if you do not want SDK activity written to browser developer tools:
+
+```js
+oaiq("init", {
+  pixelId: "<YOUR-PIXEL-ID>",
+  debug: true,
+});
+```
+
 ## Send user data
 
 Add an optional `user` object to `oaiq("init", ...)` to improve conversion matching. User data is request-scoped, so do not add it to individual `oaiq("measure", ...)` calls.
@@ -61,6 +70,19 @@ If these values are available when the installation snippet runs, you can instea
 | `zip_code` | Postal or ZIP code. Use letters, numbers, spaces, or hyphens, with a maximum of 32 characters. |
 
 Send hashes as lowercase, 64-character hexadecimal strings. Do not send raw email addresses, raw external IDs, phone numbers, or phone number hashes.
+
+You can generate the required email hash in browser code with the Web Crypto API before calling `init`:
+
+```js
+async function sha256Hex(value) {
+  const normalized = value.trim().toLowerCase();
+  const bytes = new TextEncoder().encode(normalized);
+  const digest = await crypto.subtle.digest("SHA-256", bytes);
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
+```
 
 If user data becomes available after the first `init` call, such as after login, call `init` again with the complete user object. You can omit `pixelId` after the first successful initialization.
 
