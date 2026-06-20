@@ -45,6 +45,12 @@ to provide several
 - `run_realtime_report`: Runs a Google Analytics realtime report using the
   Data API.
 
+## Guides 📘
+
+- [OpenAI Ads Measurement Pixel integration guide](docs/openai-ads-measurement-pixel.md):
+  JavaScript pixel setup, user matching fields, standard and custom events,
+  deduplication, and troubleshooting notes for measuring website conversions.
+
 ## Setup instructions 🔧
 
 ✨ Watch the [Google Analytics MCP Setup
