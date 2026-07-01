@@ -191,6 +191,13 @@ Here are some sample prompts to get you started:
   what are the custom dimensions and custom metrics in my property?
   ```
 
+## Deployment
+
+This repository contains a Python MCP server rather than a browser-facing web
+application. See the [deployment guidance](docs/deployment.md) for notes on why
+it is typically run from an MCP client instead of deployed as a public Vercel
+site.
+
 ## Contributing ✨
 
 Contributions welcome! See the [Contributing Guide](CONTRIBUTING.md).
